@@ -1,0 +1,36 @@
+{
+  "_tag": {
+    "type": "FileStateRecord"
+  },
+  "_entityId": "5JEwJCDi",
+  "fileState": {
+    "9506c412-e93c-4b71-b0d9-83944a97ba2d": {
+      "viewState": {
+        "x": 11.10191822052002,
+        "y": 8.27249526977539,
+        "z": 13.80827808380127
+      },
+      "rotationState": {
+        "x": 25.000011444091797,
+        "y": 220,
+        "z": 9.420351148037298e-7
+      }
+    },
+    "d9xltaqehk7-m81gdw59-ne9i406ok1": {
+      "viewState": {
+        "x": -77.99999999999977,
+        "y": 0
+      },
+      "scaleState": 1
+    },
+    "53bdg7g40h7-m81d4u84-v8sveuk7ytf": {
+      "viewState": {
+        "x": 0,
+        "y": 0
+      },
+      "scaleState": 1
+    }
+  },
+  "children": []
+}
+//"{FE:{"v":"1.12.3513000","c":{"FF":4701},"s":100}

@@ -1,0 +1,27 @@
+{
+  "_tag": {
+    "type": "ff.llm",
+    "resourceId": "LLM"
+  },
+  "_entityId": "G3VdPoC3",
+  "children": [],
+  "prefabVariant": null,
+  "activeValue": null,
+  "unlockedValue": null,
+  "editorLockValue": false,
+  "editorVisibleValue": true,
+  "modId": 46,
+  "modOpen": true,
+  "enableShortTerm": true,
+  "_entityName": "T_46_XXJ_WS_MODULE_AICHARACTOR",
+  "customLLMTypes": [
+    {
+      "personaID": "E3vu9fKgqgn",
+      "personaName": "Moly",
+      "personaDesc": "A master of elemental card game.",
+      "personaObservers": []
+    }
+  ],
+  "showSwitch": true
+}
+//"{FE:{"v":"1.12.3513000","c":{"FF":4701},"s":100}
