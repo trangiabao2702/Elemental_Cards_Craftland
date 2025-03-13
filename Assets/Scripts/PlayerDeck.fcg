@@ -1,0 +1,48 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+
+graph PlayerDeck {
+    _CardsInDeck List<List<object>>
+
+    event OnAwake() {
+        LogWarning("[PlayerDeck] Awake")
+    }
+
+    func InitBeginnerDeck() {
+        LogInfo("[PlayerDeck] InitBeginnerDeck()")
+
+        _CardsInDeck = List<List<object>> {
+            List<object>{"Fire", "Gray", 1},
+            List<object>{"Fire", "Green", 2},
+            List<object>{"Fire", "Blue", 3},
+            List<object>{"Fire", "Yellow", 4},
+            List<object>{"Fire", "Red", 5},
+            List<object>{"Water", "Gray", 1},
+            List<object>{"Water", "Green", 2},
+            List<object>{"Water", "Blue", 3},
+            List<object>{"Water", "Yellow", 4},
+            List<object>{"Water", "Red", 5},
+            List<object>{"Wood", "Gray", 1},
+            List<object>{"Wood", "Green", 2},
+            List<object>{"Wood", "Blue", 3},
+            List<object>{"Wood", "Yellow", 4},
+            List<object>{"Wood", "Red", 5},
+        }
+    }
+
+    func GetDeck() List<List<object>> {
+        LogInfo("[PlayerDeck] GetDeck()")
+
+        if _CardsInDeck == nil {
+            InitBeginnerDeck()
+        }
+
+        return _CardsInDeck
+    }
+
+    func SetDeck(newDeck List<List<object>>) {
+        LogInfo("[PlayerDeck] SetDeck()")
+
+        _CardsInDeck = newDeck
+    }
+}

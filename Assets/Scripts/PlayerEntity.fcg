@@ -1,0 +1,70 @@
+import "Hud.fcc" as Hud
+import "List.fcc" as List
+import "Player.fcc" as Player
+import "Workflow.fcc" as Workflow
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+
+import "./PlayerDeck.fcg" as PlayerDeck
+
+graph PlayerEntity {
+    _Deck List<List<object>>
+    _CardsOnHand List<List<object>> = List<List<object>>{}
+
+    _DuelHUD entity<CustomUI>
+
+    event OnPlayerJoin(player entity<Player>) {
+        CreateCustomUI(out var duelHud, thisEntity<Player>, EResUI.Duel)
+        _DuelHUD = duelHud
+    }
+
+    event OnPhaseStart(phase entity<Phase>) {
+        var phaseIndex int = phase<Phase>.Index
+        if phaseIndex == EPhase.Preparation {
+            SetUpDuelDeck()
+        } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
+            Draw()
+        } else if phaseIndex == EPhase.Phase1SelectCard || phaseIndex == EPhase.Phase2SelectCard {
+            SelectCard()
+        } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
+            if IsNoCardToDraw() {
+                LogInfo("[PlayerEntity] Lose")
+            }
+        } else {}
+    }
+
+    func SetUpDuelDeck() {
+        LogInfo("[PlayerEntity] SetUpDuelDeck()")
+
+        _Deck = thisEntity<PlayerDeck>.GetDeck()
+        Shuffle(_Deck)
+    }
+
+    func Draw() {
+        LogInfo("[PlayerEntity] Draw()")
+
+        if _Deck == nil {
+            SetUpDuelDeck()
+        }
+
+        while Length(_CardsOnHand) < 5 {
+            Append(_CardsOnHand, _Deck[0])
+            RemoveAt(_Deck, 0)
+        }
+
+        DispatchEventWithPlatform(OnPlayerDrawCard, _DuelHUD, PlatformType.Local, List<object>{_CardsOnHand})
+    }
+
+    func SelectCard() {
+        LogInfo("[PlayerEntity] SelectCard()")
+
+    }
+
+    func IsNoCardToDraw() bool {
+        if Length(_Deck) == 0 {
+            return true
+        }
+
+        return false
+    }
+}
