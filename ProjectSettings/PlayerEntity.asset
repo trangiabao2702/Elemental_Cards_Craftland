@@ -13,8 +13,14 @@
       "_entityId": "J0UWyuAN",
       "children": [],
       "prefabVariant": null,
-      "activeValue": null,
-      "unlockedValue": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
       "editorLockValue": false,
       "editorVisibleValue": true,
       "CameraType": "Classic",
@@ -36,13 +42,46 @@
     }
   ],
   "prefabVariant": null,
-  "activeValue": null,
-  "unlockedValue": null,
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
   "editorLockValue": false,
   "editorVisibleValue": true,
-  "ecaProps": {},
+  "ecaProps": {
+    "Player": {},
+    "FightingEntity": {},
+    "AimableEntity": {},
+    "Entity": {},
+    "ScoreableEntity": {},
+    "RankableEntity": {},
+    "Visibility": {},
+    "BuffableEntity": {},
+    "FormulableEntity": {}
+  },
   "ecaScript": null,
-  "ecaScripts": [],
+  "ecaScripts": [
+    {
+      "fileId": "dnokns78wpk-m81got5a-0ynhz3ezv5k",
+      "filePath": "Assets\\Scripts\\PlayerEntity.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "dqfjioi41r-m87igad2-shqnojnlwp",
+      "filePath": "Assets\\Scripts\\PlayerDeck.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    }
+  ],
   "avatarInfo": null,
   "sceneData": {
     "enableDepthMap": false,
@@ -240,7 +279,8 @@
     "EnableInventoryDrop": false,
     "EnableAOIFilter": false,
     "playerskill_autopathbomb_cd_percent": 100,
-    "CameraViewingAngleRestrictionType": 0
+    "CameraViewingAngleRestrictionType": 0,
+    "receive_damage": 100
   },
   "physicsData": {
     "ECCTParam_Gravity": {
@@ -264,8 +304,9 @@
     "ECCTParam_PlayerPhysicalLayer": 0,
     "ECCTParam_EnableRotateWithGravity": false
   },
-  "_entityName": "FE_0_HW_GAME_EDITOR_PLAYERSETTING",
+  "_entityName": "T_43_YU_WS_MODULE_PLAYER",
   "modId": 11,
-  "modOpen": true
+  "modOpen": true,
+  "showSwitch": false
 }
-//"{FE:{"v":"0.0.0","c":{"FF":4701},"s":100}
+//"{FE:{"v":"1.12.3513000","c":{"FF":4701},"s":100}

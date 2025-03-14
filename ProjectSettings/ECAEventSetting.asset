@@ -3,7 +3,28 @@
     "type": "ecaEventDesc"
   },
   "_entityId": "BmvZz8ma",
-  "customEventDefines": {},
-  "customName": {}
+  "customEventDefines": {
+    "signal_23564339": {
+      "name": "OnPlayerDrawCard",
+      "eventType": 0,
+      "enitityType": "CustomHud",
+      "typeID": 100000,
+      "props": [
+        {
+          "name": "cardsOnHand",
+          "value": "ListT_any",
+          "key": 1
+        }
+      ],
+      "propCount": 1,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_23564339"
+    }
+  },
+  "customName": {
+    "OnPlayerDrawCard": "signal_23564339"
+  },
+  "children": []
 }
-//"{FE:{"v":"0.0.0","c":{"FF":4701},"s":100}
+//"{FE:{"v":"1.12.3513000","c":{"FF":4701},"s":100}

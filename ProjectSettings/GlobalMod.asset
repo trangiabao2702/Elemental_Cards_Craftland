@@ -6,8 +6,14 @@
   "_entityId": "LEv3TJPL",
   "children": [],
   "prefabVariant": null,
-  "activeValue": null,
-  "unlockedValue": null,
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
   "editorLockValue": false,
   "editorVisibleValue": true,
   "modId": 39,
@@ -49,7 +55,17 @@
     "Entity": {},
     "Component": {}
   },
-  "globalGraphs": [],
-  "_entityName": "Global模组"
+  "globalGraphs": [
+    {
+      "fileId": "earjut7e434-m86od6hn-ova07q7gb5",
+      "filePath": "Assets\\Scripts\\GameManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    }
+  ],
+  "_entityName": "T_43_YU_WS_MODULE_GLOBAL",
+  "showSwitch": false
 }
-//"{FE:{"v":"0.0.0","c":{"FF":4701},"s":100}
+//"{FE:{"v":"1.12.3513000","c":{"FF":4701},"s":100}

@@ -1,0 +1,43 @@
+import "Hud.fcc" as Hud
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+
+import "./Card.fcg" as Card
+
+graph DuelHUD {
+    _CurrentCards List<entity<UIWidget>>
+    _CurrentSignals List<entity<UIWidget>>
+    _CurrentDuelCard entity<UIWidget>
+
+    _OpponentCards List<entity<UIWidget>>
+    _OpponentSignals List<entity<UIWidget>>
+    _OpponentDuelCard entity<UIWidget>
+
+    event OnAwake() {
+        var currentHand = GetChildByIndex(thisEntity, 1) as entity<UIWidget>
+        var currentCardsContainer = GetChildByIndex(currentHand, 1) as entity<UIWidget>
+        var currentSignalsContainer = GetChildByIndex(currentHand, 2) as entity<UIWidget>
+        _CurrentCards = GetChildren(currentCardsContainer) as List<entity<UIWidget>>
+        _CurrentSignals = GetChildren(currentSignalsContainer) as List<entity<UIWidget>>
+
+        var opponentHand = GetChildByIndex(thisEntity, 2) as entity<UIWidget>
+        var opponentCardsContainer = GetChildByIndex(opponentHand, 1) as entity<UIWidget>
+        var opponentSignalsContainer = GetChildByIndex(opponentHand, 2) as entity<UIWidget>
+        _OpponentCards = GetChildren(opponentCardsContainer) as List<entity<UIWidget>>
+        _OpponentSignals = GetChildren(opponentSignalsContainer) as List<entity<UIWidget>>
+
+        var duelCards = GetChildByIndex(thisEntity, 3) as entity<UIWidget>
+        var currentDuelCardContainer = GetChildByIndex(duelCards, 1) as entity<UIWidget>
+        var opponentDuelCardContainer = GetChildByIndex(duelCards, 2) as entity<UIWidget>
+        _CurrentDuelCard = GetChildByIndex(currentDuelCardContainer, 1) as entity<UIWidget>
+        _OpponentDuelCard = GetChildByIndex(opponentDuelCardContainer, 1) as entity<UIWidget>
+    }
+
+    event OnPlayerDrawCard(cardsOnHand List<object>) {
+        LogWarning("[DuelHUD] Receive event OnPlayerDrawCard: " + cardsOnHand)
+
+        for key, card in cardsOnHand {
+            _CurrentCards[key]<Card>.UpdateInfo(card as List<object>)
+        }
+    }
+}

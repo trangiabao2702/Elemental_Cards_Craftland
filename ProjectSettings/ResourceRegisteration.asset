@@ -16,7 +16,8 @@
             },
             "fileType": "ui"
           },
-          "scriptName": "Duel"
+          "scriptName": "Duel",
+          "children": []
         }
       ]
     },
@@ -38,7 +39,41 @@
     },
     "texture": {
       "id": "texture",
-      "children": []
+      "children": [
+        {
+          "refer": {
+            "fileId": "6ngadc7fv03-m81e5vpl-982ooj5j43q",
+            "filePath": "Assets\\Sprites\\Card_Element_Fire.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "ElementFire"
+        },
+        {
+          "refer": {
+            "fileId": "s5lmziz30xs-m81e5w1j-hc63xpz0lw",
+            "filePath": "Assets\\Sprites\\Card_Element_Water.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "ElementWater"
+        },
+        {
+          "refer": {
+            "fileId": "g43k5xye09p-m81e5w69-rioc1bf6g0b",
+            "filePath": "Assets\\Sprites\\Card_Element_Wood.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "ElementWood"
+        }
+      ]
     },
     "effecttype": {
       "id": "effecttype",

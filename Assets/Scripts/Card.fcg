@@ -1,0 +1,51 @@
+import "Hud.fcc" as Hud
+import "Workflow.fcc" as Workflow
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+
+graph Card {
+    CARD_COLORS Map<string, Color> = Map<string, Color>{
+        "Gray": #FFFFFFFF,
+        "Green": #00B24AFF,
+        "Blue": #00B2F7FF,
+        "Yellow": #FFF000FF,
+        "Red": #FF0000FF,
+    }
+    CARD_ELEMENTS Map<string, EResSprite> = Map<string, EResSprite>{
+        "Fire": EResSprite.ElementFire,
+        "Water": EResSprite.ElementWater,
+        "Wood": EResSprite.ElementWood,
+    }
+
+    _Color string
+    _Element string
+    _PowerPoint int
+
+    _ColorWidget entity<UIWidget>
+    _ElementWidget entity<UIWidget>
+    _PowerPointWidget entity<UIWidget>
+
+    event OnAwake() {
+        _ColorWidget = GetChildByIndex(thisEntity, 0) as entity<UIWidget>
+        _ElementWidget = GetChildByIndex(thisEntity, 1) as entity<UIWidget>
+        _PowerPointWidget = GetChildByIndex(thisEntity, 2) as entity<UIWidget>
+    }
+
+    func UpdateInfo(cardInfo List<object>) {
+        LogInfo("[Card] UpdateInfo: " + cardInfo)
+
+        _Color = cardInfo[0]
+        _Element = cardInfo[1]
+        _PowerPoint = cardInfo[2] as int
+
+        UpdateVisual()
+    }
+
+    func UpdateVisual() {
+        LogInfo("[Card] UpdateVisual")
+
+        _ColorWidget<UIWidgetImage>.Color = CARD_COLORS[_Color]
+        _ElementWidget<UIWidgetImage>.SpriteName = CARD_ELEMENTS[_Element]
+        _PowerPointWidget<UIWidgetLabel>.Content = _PowerPoint
+    }
+}
