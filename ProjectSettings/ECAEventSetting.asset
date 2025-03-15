@@ -42,11 +42,34 @@
       "apiTargetV2": "both",
       "version": 45,
       "key": "signal_60840701"
+    },
+    "signal_15983085": {
+      "name": "OnPlayerShowDuelCard",
+      "eventType": 0,
+      "enitityType": "CustomHud",
+      "typeID": 100002,
+      "props": [
+        {
+          "name": "duelCard",
+          "value": "ListT_any",
+          "key": 1
+        },
+        {
+          "name": "player",
+          "value": "Player",
+          "key": 2
+        }
+      ],
+      "propCount": 2,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_15983085"
     }
   },
   "customName": {
     "OnPlayerDrawCard": "signal_23564339",
-    "OnHUDButtonTapped": "signal_60840701"
+    "OnHUDButtonTapped": "signal_60840701",
+    "OnPlayerShowDuelCard": "signal_15983085"
   },
   "children": []
 }

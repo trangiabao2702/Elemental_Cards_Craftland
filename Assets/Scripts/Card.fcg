@@ -47,15 +47,27 @@ graph Card {
         _ColorWidget<UIWidgetImage>.Color = CARD_COLORS[_Color]
         _ElementWidget<UIWidgetImage>.SpriteName = CARD_ELEMENTS[_Element]
         _PowerPointWidget<UIWidgetLabel>.Content = _PowerPoint
+
+        thisEntity<UIWidget>.Active = true
     }
 
     func GetInfo() List<object> {
+        LogInfo("[Card] GetInfo")
+
         return List<object>{_Color, _Element, _PowerPoint}
     }
 
     func SetSelected() {
+        LogInfo("[Card] SetSelected")
+
         var anchorPosition = thisEntity<UIWidget>.AnchorPosition
         anchorPosition.Y = anchorPosition.Y + 20
         thisEntity<UIWidget>.AnchorPosition = anchorPosition
+    }
+
+    func Hide() {
+        LogInfo("[Card] Hide")
+        
+        thisEntity<UIWidget>.Active = false
     }
 }

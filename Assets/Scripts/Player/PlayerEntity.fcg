@@ -6,7 +6,7 @@ import "StdLibrary.fcc" as StdLib
 import "EditorGenLib.fcc" as EditorLib
 
 import "./PlayerDeck.fcg" as PlayerDeck
-import "./Card.fcg" as Card
+import "../Card.fcg" as Card
 
 graph PlayerEntity {
     _Deck List<List<object>>
@@ -14,6 +14,7 @@ graph PlayerEntity {
     _DuelCard List<object> = List<object>{}
 
     _DuelHUD entity<CustomUI>
+    _SelectedCardEntity entity<UIWidget>
 
     event OnPlayerJoin(player entity<Player>) {
         CreateCustomUI(out var duelHud, thisEntity<Player>, EResUI.Duel)
@@ -26,6 +27,8 @@ graph PlayerEntity {
             SetUpDuelDeck()
         } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
             Draw()
+        } else if phaseIndex == EPhase.Phase1Duel || phaseIndex == EPhase.Phase2Duel {
+            ShowDuelCard()
         } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
             if IsNoCardToDraw() {
                 LogInfo("[PlayerEntity] Lose")
@@ -33,6 +36,7 @@ graph PlayerEntity {
         } else {}
     }
 
+    // Phase: Preparation
     func SetUpDuelDeck() {
         LogInfo("[PlayerEntity] SetUpDuelDeck()")
 
@@ -40,6 +44,7 @@ graph PlayerEntity {
         Shuffle(_Deck)
     }
 
+    // Phase: Start
     func Draw() {
         LogInfo("[PlayerEntity] Draw()")
 
@@ -55,15 +60,26 @@ graph PlayerEntity {
         DispatchEventWithPlatform(OnPlayerDrawCard, _DuelHUD, PlatformType.Local, List<object>{_CardsOnHand})
     }
 
+    // Phase: Select
     func SelectCard(cardEntity entity<UIWidget>) {
         LogInfo("[PlayerEntity] SelectCard(): " + cardEntity)
 
         var currentPhaseIndex int = globalEntity<Global>.CurrentPhaseIndex
         if currentPhaseIndex == EPhase.Phase1SelectCard || currentPhaseIndex == EPhase.Phase2SelectCard {
             _DuelCard = cardEntity<Card>.GetInfo()
+            _SelectedCardEntity = cardEntity
         }
     }
 
+    // Phase: Duel
+    func ShowDuelCard() {
+        LogInfo("[PlayerEntity] ShowDuelCard(): ")
+
+        _SelectedCardEntity<Card>.Hide()
+        DispatchEventWithPlatform(OnPlayerShowDuelCard, _DuelHUD, PlatformType.Local, List<object>{_DuelCard, thisEntity})
+    }
+
+    // Phase: End
     func IsNoCardToDraw() bool {
         if Length(_Deck) == 0 {
             return true

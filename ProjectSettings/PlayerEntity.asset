@@ -66,16 +66,16 @@
   "ecaScript": null,
   "ecaScripts": [
     {
-      "fileId": "dnokns78wpk-m81got5a-0ynhz3ezv5k",
-      "filePath": "Assets\\Scripts\\PlayerEntity.fcg",
+      "fileId": "4vhmckot8sq-m8afvob7-jbk9fmwflho",
+      "filePath": "Assets\\Scripts\\Player\\PlayerEntity.fcg",
       "_tag": {
         "type": "GFileRefer"
       },
       "fileType": "ugcscript"
     },
     {
-      "fileId": "dqfjioi41r-m87igad2-shqnojnlwp",
-      "filePath": "Assets\\Scripts\\PlayerDeck.fcg",
+      "fileId": "670m4fdijvs-m8afvoaj-5ez9tan8ekr",
+      "filePath": "Assets\\Scripts\\Player\\PlayerDeck.fcg",
       "_tag": {
         "type": "GFileRefer"
       },

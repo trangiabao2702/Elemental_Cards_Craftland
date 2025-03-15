@@ -2,9 +2,11 @@ import "Hud.fcc" as Hud
 import "StdLibrary.fcc" as StdLib
 import "EditorGenLib.fcc" as EditorLib
 
-import "./Card.fcg" as Card
+import "../Card.fcg" as Card
 
 graph DuelHUD {
+    _Owner entity<Player>
+
     _CurrentCards List<entity<UIWidget>>
     _CurrentSignals List<entity<UIWidget>>
     _CurrentDuelCard entity<UIWidget>
@@ -14,6 +16,8 @@ graph DuelHUD {
     _OpponentDuelCard entity<UIWidget>
 
     event OnAwake() {
+        _Owner = GetOwner(thisEntity)
+
         var currentHand = GetChildByIndex(thisEntity, 1) as entity<UIWidget>
         var currentCardsContainer = GetChildByIndex(currentHand, 1) as entity<UIWidget>
         var currentSignalsContainer = GetChildByIndex(currentHand, 2) as entity<UIWidget>
@@ -38,6 +42,16 @@ graph DuelHUD {
 
         for key, card in cardsOnHand {
             _CurrentCards[key]<Card>.UpdateInfo(card as List<object>)
+        }
+    }
+
+    event OnPlayerShowDuelCard(duelCard List<object>, player entity<Player>) {
+        LogWarning("[DuelHUD] Receive event OnPlayerShowDuelCard: " + player + " show " + duelCard)
+
+        if player == _Owner {
+            _CurrentDuelCard<Card>.UpdateInfo(duelCard)
+        } else {
+            _OpponentDuelCard<Card>.UpdateInfo(duelCard)
         }
     }
 }

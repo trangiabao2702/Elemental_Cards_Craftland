@@ -2,7 +2,7 @@ import "StdLibrary.fcc" as StdLib
 import "EditorGenLib.fcc" as EditorLib
 import "Hud.fcc" as Hud
 
-import "../PlayerEntity.fcg" as PlayerEntity
+import "../Player/PlayerEntity.fcg" as PlayerEntity
 import "../Card.fcg" as Card
 
 graph HUDButton {
@@ -15,6 +15,8 @@ graph HUDButton {
     }
 
     event OnTapped(player entity<Player>) {
+        LogInfo("[HUDButton] OnTapped: " + player + " tapped " + thisEntity)
+
         if IsContainButton(thisEntity as entity<UIWidget>, player, CARD_ON_HAND_BUTTON_IDS) {
             var cardEntity entity<UIWidget> = GetParent(thisEntity) as entity<UIWidget>
             player<PlayerEntity>.SelectCard(cardEntity)
