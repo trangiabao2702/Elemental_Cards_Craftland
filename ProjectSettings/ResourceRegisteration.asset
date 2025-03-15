@@ -17,7 +17,28 @@
             "fileType": "ui"
           },
           "scriptName": "Duel",
-          "children": []
+          "children": [
+            {
+              "id": "ZhZmXyJM",
+              "scriptName": "ClickCard1"
+            },
+            {
+              "id": "YtcSj7ED",
+              "scriptName": "ClickCard2"
+            },
+            {
+              "id": "ku7n9y3F",
+              "scriptName": "ClickCard3"
+            },
+            {
+              "id": "kRTJkObS",
+              "scriptName": "ClickCard4"
+            },
+            {
+              "id": "Az6TESFm",
+              "scriptName": "ClickCard5"
+            }
+          ]
         }
       ]
     },

@@ -6,10 +6,12 @@ import "StdLibrary.fcc" as StdLib
 import "EditorGenLib.fcc" as EditorLib
 
 import "./PlayerDeck.fcg" as PlayerDeck
+import "./Card.fcg" as Card
 
 graph PlayerEntity {
     _Deck List<List<object>>
     _CardsOnHand List<List<object>> = List<List<object>>{}
+    _DuelCard List<object> = List<object>{}
 
     _DuelHUD entity<CustomUI>
 
@@ -24,8 +26,6 @@ graph PlayerEntity {
             SetUpDuelDeck()
         } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
             Draw()
-        } else if phaseIndex == EPhase.Phase1SelectCard || phaseIndex == EPhase.Phase2SelectCard {
-            SelectCard()
         } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
             if IsNoCardToDraw() {
                 LogInfo("[PlayerEntity] Lose")
@@ -55,9 +55,13 @@ graph PlayerEntity {
         DispatchEventWithPlatform(OnPlayerDrawCard, _DuelHUD, PlatformType.Local, List<object>{_CardsOnHand})
     }
 
-    func SelectCard() {
-        LogInfo("[PlayerEntity] SelectCard()")
+    func SelectCard(cardEntity entity<UIWidget>) {
+        LogInfo("[PlayerEntity] SelectCard(): " + cardEntity)
 
+        var currentPhaseIndex int = globalEntity<Global>.CurrentPhaseIndex
+        if currentPhaseIndex == EPhase.Phase1SelectCard || currentPhaseIndex == EPhase.Phase2SelectCard {
+            _DuelCard = cardEntity<Card>.GetInfo()
+        }
     }
 
     func IsNoCardToDraw() bool {

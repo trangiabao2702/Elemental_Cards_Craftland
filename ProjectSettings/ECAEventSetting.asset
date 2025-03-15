@@ -20,10 +20,33 @@
       "apiTargetV2": "both",
       "version": 45,
       "key": "signal_23564339"
+    },
+    "signal_60840701": {
+      "name": "OnHUDButtonTapped",
+      "eventType": 0,
+      "enitityType": "Entity",
+      "typeID": 100001,
+      "props": [
+        {
+          "name": "button",
+          "value": "HudWidget",
+          "key": 1
+        },
+        {
+          "name": "player",
+          "value": "Player",
+          "key": 2
+        }
+      ],
+      "propCount": 2,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_60840701"
     }
   },
   "customName": {
-    "OnPlayerDrawCard": "signal_23564339"
+    "OnPlayerDrawCard": "signal_23564339",
+    "OnHUDButtonTapped": "signal_60840701"
   },
   "children": []
 }

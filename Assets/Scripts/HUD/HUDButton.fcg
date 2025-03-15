@@ -1,0 +1,33 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+
+import "../PlayerEntity.fcg" as PlayerEntity
+import "../Card.fcg" as Card
+
+graph HUDButton {
+    CARD_ON_HAND_BUTTON_IDS List<CustomHudWidgetID> = List<CustomHudWidgetID>{
+        EResUIDuel.ClickCard1,
+        EResUIDuel.ClickCard2,
+        EResUIDuel.ClickCard3,
+        EResUIDuel.ClickCard4,
+        EResUIDuel.ClickCard5,
+    }
+
+    event OnTapped(player entity<Player>) {
+        if IsContainButton(thisEntity as entity<UIWidget>, player, CARD_ON_HAND_BUTTON_IDS) {
+            var cardEntity entity<UIWidget> = GetParent(thisEntity) as entity<UIWidget>
+            player<PlayerEntity>.SelectCard(cardEntity)
+        } else {}
+    }
+
+    func IsContainButton(button entity<UIWidget>, player entity<Player>, buttonIdsList List<CustomHudWidgetID>) bool {
+        for key, buttonId in buttonIdsList {
+            if button == GetWidgetFromCustomUI(player, button<UIWidget>.ParentUI, buttonId) {
+                return true
+            }
+        }
+
+        return false
+    }
+}
