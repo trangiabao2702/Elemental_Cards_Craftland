@@ -1,0 +1,64 @@
+import "Hud.fcc" as Hud
+import "Workflow.fcc" as Workflow
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+
+import "./Player/PlayerEntity.fcg" as PlayerEntity
+import "./Card.fcg" as Card
+
+graph GameManager {
+    event OnDuelCardSet(player entity<Player>, opponent entity<Player>) {
+        var result CompareEnum = CompareCards(player<PlayerEntity>.GetDuelCard(), opponent<PlayerEntity>.GetDuelCard())
+        if result == CompareEnum.Win {
+            LogWarning("Player Win: " + player<Player>.NickName)
+        } else if result == CompareEnum.Lose {
+            LogWarning("Player Lose: " + player<Player>.NickName)
+        } else {
+            LogWarning("Draw")
+        }
+    }
+
+    // Win = 1; Draw = 0; Lose = -1
+    func CompareCards(cardA entity<UIWidget>, cardB entity<UIWidget>) CompareEnum {
+        var resultCompareElements CompareEnum = CompareElements(cardA<Card>.GetElement(), cardB<Card>.GetElement())
+        if resultCompareElements != CompareEnum.Draw {
+            return resultCompareElements
+        }
+
+        return ComparePowerPoints(cardA<Card>.GetPowerPoint(), cardB<Card>.GetPowerPoint())
+    }
+
+    func CompareElements(elementA string, elementB string) CompareEnum {
+        if elementA == elementB {
+            return CompareEnum.Draw
+        }
+
+        if elementA == ElementEnum.Fire && elementB == ElementEnum.Water {
+            return CompareEnum.Lose
+        } else {
+            return CompareEnum.Win
+        }
+        
+        if elementA == ElementEnum.Water && elementB == ElementEnum.Wood {
+            return CompareEnum.Lose
+        } else {
+            return CompareEnum.Win
+        }
+        
+        if elementA == ElementEnum.Wood && elementB == ElementEnum.Fire {
+            return CompareEnum.Lose
+        } else {
+            return CompareEnum.Win
+        }
+    }
+
+    func ComparePowerPoints(powerPointA int, powerPointB int) CompareEnum {
+        if powerPointA > powerPointB {
+            return CompareEnum.Win
+        } else if powerPointA < powerPointB {
+            return CompareEnum.Lose
+        } else {
+            return CompareEnum.Draw
+        }
+    }
+}

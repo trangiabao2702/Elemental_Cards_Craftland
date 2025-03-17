@@ -7,14 +7,15 @@ import "EditorGenLib.fcc" as EditorLib
 
 import "./PlayerDeck.fcg" as PlayerDeck
 import "../Card.fcg" as Card
+import "Hostility.fcc" as Hostility
 
 graph PlayerEntity {
+    _Opponent entity<Player>
     _Deck List<List<object>>
     _CardsOnHand List<List<object>> = List<List<object>>{}
-    _DuelCard List<object> = List<object>{}
 
     _DuelHUD entity<CustomUI>
-    _SelectedCardEntity entity<UIWidget>
+    _DuelCard entity<UIWidget>
 
     event OnPlayerJoin(player entity<Player>) {
         CreateCustomUI(out var duelHud, thisEntity<Player>, EResUI.Duel)
@@ -28,12 +29,33 @@ graph PlayerEntity {
         } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
             Draw()
         } else if phaseIndex == EPhase.Phase1Duel || phaseIndex == EPhase.Phase2Duel {
-            ShowDuelCard()
+            
         } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
             if IsNoCardToDraw() {
                 LogInfo("[PlayerEntity] Lose")
             }
         } else {}
+    }
+
+    event OnPhaseEnd(phase entity<Phase>) {
+        var phaseIndex int = phase<Phase>.Index
+        if phaseIndex == EPhase.Phase1SelectCard || phaseIndex == EPhase.Phase2SelectCard {
+            ShowDuelCard()
+        }
+    }
+
+    func SetOpponent() {
+        var hostTeam entity<Team> = thisEntity<Player>.HostTeam
+        var opponentTeam entity<Team> = hostTeam<Team>.AttackableTeams[0]
+        _Opponent = opponentTeam<Team>.AllTeammates[0]
+    }
+
+    func GetOpponent() entity<Player> {
+        return _Opponent
+    }
+
+    func GetDuelCard() entity<UIWidget> {
+        return _DuelCard
     }
 
     // Phase: Preparation
@@ -66,8 +88,7 @@ graph PlayerEntity {
 
         var currentPhaseIndex int = globalEntity<Global>.CurrentPhaseIndex
         if currentPhaseIndex == EPhase.Phase1SelectCard || currentPhaseIndex == EPhase.Phase2SelectCard {
-            _DuelCard = cardEntity<Card>.GetInfo()
-            _SelectedCardEntity = cardEntity
+            _DuelCard = cardEntity
         }
     }
 
@@ -75,7 +96,7 @@ graph PlayerEntity {
     func ShowDuelCard() {
         LogInfo("[PlayerEntity] ShowDuelCard(): ")
 
-        _SelectedCardEntity<Card>.Hide()
+        _DuelCard<Card>.Hide()
         DispatchEventWithPlatform(OnPlayerShowDuelCard, _DuelHUD, PlatformType.Local, List<object>{_DuelCard, thisEntity})
     }
 

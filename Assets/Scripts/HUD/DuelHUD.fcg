@@ -1,7 +1,9 @@
 import "Hud.fcc" as Hud
+import "Workflow.fcc" as Workflow
 import "StdLibrary.fcc" as StdLib
 import "EditorGenLib.fcc" as EditorLib
 
+import "../Player/PlayerEntity.fcg" as PlayerEntity
 import "../Card.fcg" as Card
 
 graph DuelHUD {
@@ -14,6 +16,9 @@ graph DuelHUD {
     _OpponentCards List<entity<UIWidget>>
     _OpponentSignals List<entity<UIWidget>>
     _OpponentDuelCard entity<UIWidget>
+
+    IsSetCurrentDuelCard bool
+    IsSetOpponentDuelCard bool
 
     event OnAwake() {
         _Owner = GetOwner(thisEntity)
@@ -37,6 +42,14 @@ graph DuelHUD {
         _OpponentDuelCard = GetChildByIndex(opponentDuelCardContainer, 1) as entity<UIWidget>
     }
 
+    event OnPhaseStart(phase entity<Phase>) {
+        var phaseIndex int = phase<Phase>.Index
+        if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
+            IsSetCurrentDuelCard = false
+            IsSetOpponentDuelCard = false
+        }
+    }
+
     event OnPlayerDrawCard(cardsOnHand List<object>) {
         LogWarning("[DuelHUD] Receive event OnPlayerDrawCard: " + cardsOnHand)
 
@@ -50,8 +63,16 @@ graph DuelHUD {
 
         if player == _Owner {
             _CurrentDuelCard<Card>.UpdateInfo(duelCard)
+            IsSetCurrentDuelCard = true
         } else {
             _OpponentDuelCard<Card>.UpdateInfo(duelCard)
+            IsSetOpponentDuelCard = true
+        }
+    }
+
+    func CheckSetDuelCards() {
+        if IsSetCurrentDuelCard && IsSetOpponentDuelCard {
+            DispatchEventWithPlatform(OnDuelCardSet, globalEntity, PlatformType.Local, List<object>{_Owner, _Owner<PlayerEntity>.GetOpponent()})
         }
     }
 }

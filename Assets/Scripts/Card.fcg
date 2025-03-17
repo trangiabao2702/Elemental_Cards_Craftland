@@ -5,16 +5,16 @@ import "EditorGenLib.fcc" as EditorLib
 
 graph Card {
     CARD_COLORS Map<string, Color> = Map<string, Color>{
-        "Gray": #FFFFFFFF,
-        "Green": #00B24AFF,
-        "Blue": #00B2F7FF,
-        "Yellow": #FFF000FF,
-        "Red": #FF0000FF,
+        ColorEnum.Gray: #FFFFFFFF,
+        ColorEnum.Green: #00B24AFF,
+        ColorEnum.Blue: #00B2F7FF,
+        ColorEnum.Yellow: #FFF000FF,
+        ColorEnum.Red: #FF0000FF,
     }
     CARD_ELEMENTS Map<string, EResSprite> = Map<string, EResSprite>{
-        "Fire": EResSprite.ElementFire,
-        "Water": EResSprite.ElementWater,
-        "Wood": EResSprite.ElementWood,
+        ElementEnum.Fire: EResSprite.ElementFire,
+        ElementEnum.Water: EResSprite.ElementWater,
+        ElementEnum.Wood: EResSprite.ElementWood,
     }
 
     _Color string
@@ -57,6 +57,18 @@ graph Card {
         return List<object>{_Color, _Element, _PowerPoint}
     }
 
+    func GetColor() string {
+        return _Color
+    }
+
+    func GetElement() string {
+        return _Element
+    }
+
+    func GetPowerPoint() int {
+        return _PowerPoint
+    }
+
     func SetSelected() {
         LogInfo("[Card] SetSelected")
 
@@ -67,7 +79,7 @@ graph Card {
 
     func Hide() {
         LogInfo("[Card] Hide")
-        
+
         thisEntity<UIWidget>.Active = false
     }
 }

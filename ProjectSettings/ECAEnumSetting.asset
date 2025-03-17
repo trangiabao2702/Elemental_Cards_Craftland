@@ -4,7 +4,106 @@
   },
   "_entityId": "6kC0jfLv",
   "enumCount": 0,
-  "enumDefines": {},
-  "enumNameMap": {}
+  "enumDefines": {
+    "CustomEnum33239552": {
+      "label": "CompareEnum",
+      "key": "CustomEnum33239552",
+      "type": "Int",
+      "info": [
+        {
+          "label": "Win",
+          "key": "E82826336",
+          "value": 1,
+          "type": "Int"
+        },
+        {
+          "label": "Draw",
+          "key": "E34645722",
+          "value": 0,
+          "type": "Int"
+        },
+        {
+          "label": "Lose",
+          "key": "E35389723",
+          "value": -1,
+          "type": "Int"
+        }
+      ],
+      "isCustom": true,
+      "isDirty": false
+    },
+    "CustomEnum56906047": {
+      "label": "ElementEnum",
+      "key": "CustomEnum56906047",
+      "type": "String",
+      "info": [
+        {
+          "label": "Fire",
+          "key": "E81438329",
+          "value": "Fire",
+          "type": "String"
+        },
+        {
+          "label": "Water",
+          "key": "E31073563",
+          "value": "Water",
+          "type": "String"
+        },
+        {
+          "label": "Wood",
+          "key": "E51540450",
+          "value": "Wood",
+          "type": "String"
+        }
+      ],
+      "isCustom": true,
+      "isDirty": false
+    },
+    "CustomEnum71424697": {
+      "label": "ColorEnum",
+      "key": "CustomEnum71424697",
+      "type": "String",
+      "info": [
+        {
+          "label": "Red",
+          "key": "E75321084",
+          "value": "Red",
+          "type": "String"
+        },
+        {
+          "label": "Yellow",
+          "key": "E43453490",
+          "value": "Yellow",
+          "type": "String"
+        },
+        {
+          "label": "Blue",
+          "key": "E84013618",
+          "value": "Blue",
+          "type": "String"
+        },
+        {
+          "label": "Green",
+          "key": "E34274064",
+          "value": "Green",
+          "type": "String"
+        },
+        {
+          "label": "Gray",
+          "key": "E44537936",
+          "value": "Gray",
+          "type": "String"
+        }
+      ],
+      "isCustom": true,
+      "isDirty": false
+    }
+  },
+  "enumNameMap": {
+    "CompareEnum": "CustomEnum33239552",
+    "ElementEnum": "CustomEnum56906047",
+    "ColorEnum": "CustomEnum71424697"
+  },
+  "children": []
 }
-//"{FE:{"v":"0.0.0","c":{"FF":4701},"s":100}
+//"{FE:{"v":"1.12.3513000","c":{"FF":4701},"s":100}

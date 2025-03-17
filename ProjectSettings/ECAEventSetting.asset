@@ -64,12 +64,35 @@
       "apiTargetV2": "both",
       "version": 45,
       "key": "signal_15983085"
+    },
+    "signal_22936200": {
+      "name": "OnDuelCardSet",
+      "eventType": 0,
+      "enitityType": "Entity",
+      "typeID": 100003,
+      "props": [
+        {
+          "name": "player",
+          "value": "Player",
+          "key": 2
+        },
+        {
+          "name": "opponent",
+          "value": "Player",
+          "key": 3
+        }
+      ],
+      "propCount": 3,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_22936200"
     }
   },
   "customName": {
     "OnPlayerDrawCard": "signal_23564339",
     "OnHUDButtonTapped": "signal_60840701",
-    "OnPlayerShowDuelCard": "signal_15983085"
+    "OnPlayerShowDuelCard": "signal_15983085",
+    "OnDuelCardSet": "signal_22936200"
   },
   "children": []
 }

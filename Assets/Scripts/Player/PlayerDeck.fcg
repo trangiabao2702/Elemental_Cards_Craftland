@@ -12,21 +12,21 @@ graph PlayerDeck {
         LogInfo("[PlayerDeck] InitBeginnerDeck()")
 
         _CardsInDeck = List<List<object>> {
-            List<object>{"Gray", "Fire", 1},
-            List<object>{"Green", "Fire", 2},
-            List<object>{"Blue", "Fire", 3},
-            List<object>{"Yellow", "Fire", 4},
-            List<object>{"Red", "Fire", 5},
-            List<object>{"Gray", "Water", 1},
-            List<object>{"Green", "Water", 2},
-            List<object>{"Blue", "Water", 3},
-            List<object>{"Yellow", "Water", 4},
-            List<object>{"Red", "Water", 5},
-            List<object>{"Gray", "Wood", 1},
-            List<object>{"Green", "Wood", 2},
-            List<object>{"Blue", "Wood", 3},
-            List<object>{"Yellow", "Wood", 4},
-            List<object>{"Red", "Wood", 5},
+            List<object>{ColorEnum.Gray, ElementEnum.Fire, 1},
+            List<object>{ColorEnum.Green, ElementEnum.Fire, 2},
+            List<object>{ColorEnum.Blue, ElementEnum.Fire, 3},
+            List<object>{ColorEnum.Yellow, ElementEnum.Fire, 4},
+            List<object>{ColorEnum.Red, ElementEnum.Fire, 5},
+            List<object>{ColorEnum.Gray, ElementEnum.Water, 1},
+            List<object>{ColorEnum.Green, ElementEnum.Water, 2},
+            List<object>{ColorEnum.Blue, ElementEnum.Water, 3},
+            List<object>{ColorEnum.Yellow, ElementEnum.Water, 4},
+            List<object>{ColorEnum.Red, ElementEnum.Water, 5},
+            List<object>{ColorEnum.Gray, ElementEnum.Wood, 1},
+            List<object>{ColorEnum.Green, ElementEnum.Wood, 2},
+            List<object>{ColorEnum.Blue, ElementEnum.Wood, 3},
+            List<object>{ColorEnum.Yellow, ElementEnum.Wood, 4},
+            List<object>{ColorEnum.Red, ElementEnum.Wood, 5},
         }
     }
 

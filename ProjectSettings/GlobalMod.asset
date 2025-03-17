@@ -55,7 +55,16 @@
     "Entity": {},
     "Component": {}
   },
-  "globalGraphs": [],
+  "globalGraphs": [
+    {
+      "fileId": "4og04hvkixl-m8ah2byt-p9cgertx4fc",
+      "filePath": "Assets\\Scripts\\GameManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    }
+  ],
   "_entityName": "T_43_YU_WS_MODULE_GLOBAL",
   "showSwitch": false
 }
