@@ -7927,8 +7927,8 @@
   },
   "ecaScripts": [
     {
-      "fileId": "ja0of6m3x9-m87hju7p-sowoffsi4w",
-      "filePath": "Assets\\Scripts\\DuelHUD.fcg",
+      "fileId": "j0enl1runz-m8afvo9s-0cvw2gaqnpq",
+      "filePath": "Assets\\Scripts\\HUD\\DuelHUD.fcg",
       "_tag": {
         "type": "GFileRefer"
       },

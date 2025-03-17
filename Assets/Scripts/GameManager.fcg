@@ -7,6 +7,20 @@ import "./Player/PlayerEntity.fcg" as PlayerEntity
 import "./Card.fcg" as Card
 
 graph GameManager {
+    event OnPhaseStart(phase entity<Phase>) {
+        var phaseIndex int = phase<Phase>.Index
+        if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
+            LogWarning("PHASE START")
+        } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
+            LogWarning("PHASE START")
+        } else if phaseIndex == EPhase.Phase1SelectCard || phaseIndex == EPhase.Phase2SelectCard {
+            LogWarning("PHASE SELECT CARD")
+        } else if phaseIndex == EPhase.Phase1Duel || phaseIndex == EPhase.Phase2Duel {
+            LogWarning("PHASE DUEL")
+        } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
+            LogWarning("PHASE END")
+        } else {}
+    }
     event OnDuelCardSet(player entity<Player>, opponent entity<Player>) {
         var result CompareEnum = CompareCards(player<PlayerEntity>.GetDuelCard(), opponent<PlayerEntity>.GetDuelCard())
         if result == CompareEnum.Win {

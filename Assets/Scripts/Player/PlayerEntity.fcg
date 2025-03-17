@@ -3,11 +3,11 @@ import "List.fcc" as List
 import "Player.fcc" as Player
 import "Workflow.fcc" as Workflow
 import "StdLibrary.fcc" as StdLib
+import "Hostility.fcc" as Hostility
 import "EditorGenLib.fcc" as EditorLib
 
 import "./PlayerDeck.fcg" as PlayerDeck
 import "../Card.fcg" as Card
-import "Hostility.fcc" as Hostility
 
 graph PlayerEntity {
     _Opponent entity<Player>
@@ -16,6 +16,7 @@ graph PlayerEntity {
 
     _DuelHUD entity<CustomUI>
     _DuelCard entity<UIWidget>
+    _PrevSelectedCard entity<UIWidget>
 
     event OnPlayerJoin(player entity<Player>) {
         CreateCustomUI(out var duelHud, thisEntity<Player>, EResUI.Duel)
@@ -80,6 +81,8 @@ graph PlayerEntity {
         }
 
         DispatchEventWithPlatform(OnPlayerDrawCard, _DuelHUD, PlatformType.Local, List<object>{_CardsOnHand})
+
+        _DuelCard<Card>.SetSelected(false)
     }
 
     // Phase: Select
@@ -89,6 +92,13 @@ graph PlayerEntity {
         var currentPhaseIndex int = globalEntity<Global>.CurrentPhaseIndex
         if currentPhaseIndex == EPhase.Phase1SelectCard || currentPhaseIndex == EPhase.Phase2SelectCard {
             _DuelCard = cardEntity
+
+            if _PrevSelectedCard != nil {
+                _PrevSelectedCard<Card>.SetSelected(false)
+            }
+
+            _PrevSelectedCard = _DuelCard
+            _DuelCard<Card>.SetSelected(true)
         }
     }
 
@@ -97,7 +107,7 @@ graph PlayerEntity {
         LogInfo("[PlayerEntity] ShowDuelCard(): ")
 
         _DuelCard<Card>.Hide()
-        DispatchEventWithPlatform(OnPlayerShowDuelCard, _DuelHUD, PlatformType.Local, List<object>{_DuelCard, thisEntity})
+        DispatchEventWithPlatform(OnPlayerShowDuelCard, _DuelHUD, PlatformType.Local, List<object>{_DuelCard<Card>.GetInfo(), thisEntity})
     }
 
     // Phase: End

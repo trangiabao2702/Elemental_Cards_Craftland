@@ -42,7 +42,7 @@ graph Card {
     }
 
     func UpdateVisual() {
-        LogInfo("[Card] UpdateVisual")
+        LogInfo("[Card] UpdateVisual: " + CARD_COLORS[_Color] + " - " + CARD_ELEMENTS[_Element] + " - " + _PowerPoint)
 
         _ColorWidget<UIWidgetImage>.Color = CARD_COLORS[_Color]
         _ElementWidget<UIWidgetImage>.SpriteName = CARD_ELEMENTS[_Element]
@@ -69,11 +69,15 @@ graph Card {
         return _PowerPoint
     }
 
-    func SetSelected() {
-        LogInfo("[Card] SetSelected")
+    func SetSelected(isSelected bool) {
+        LogInfo("[Card] SetSelected: " + isSelected)
 
         var anchorPosition = thisEntity<UIWidget>.AnchorPosition
-        anchorPosition.Y = anchorPosition.Y + 20
+        if isSelected {
+            anchorPosition.Y = 20
+        } else {
+            anchorPosition.Y = 0
+        }
         thisEntity<UIWidget>.AnchorPosition = anchorPosition
     }
 
