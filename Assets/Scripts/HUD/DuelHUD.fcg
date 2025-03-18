@@ -1,4 +1,5 @@
 import "Hud.fcc" as Hud
+import "List.fcc" as List
 import "Workflow.fcc" as Workflow
 import "StdLibrary.fcc" as StdLib
 import "EditorGenLib.fcc" as EditorLib
@@ -74,5 +75,9 @@ graph DuelHUD {
         if IsSetCurrentDuelCard && IsSetOpponentDuelCard {
             DispatchEventWithPlatform(OnDuelCardSet, globalEntity, PlatformType.Local, List<object>{_Owner, _Owner<PlayerEntity>.GetOpponent()})
         }
+    }
+
+    func GetIndexOfCurrentCardWidget(cardWidget entity<UIWidget>) int {
+        return IndexOf(_CurrentCards, cardWidget)
     }
 }
