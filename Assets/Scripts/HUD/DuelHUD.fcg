@@ -6,6 +6,7 @@ import "EditorGenLib.fcc" as EditorLib
 
 import "../Player/PlayerEntity.fcg" as PlayerEntity
 import "../Card.fcg" as Card
+import "Hostility.fcc" as Hostility
 
 graph DuelHUD {
     _Owner entity<Player>
@@ -37,8 +38,8 @@ graph DuelHUD {
         _OpponentSignals = GetChildren(opponentSignalsContainer) as List<entity<UIWidget>>
 
         var duelCards = GetChildByIndex(thisEntity, 3) as entity<UIWidget>
-        var currentDuelCardContainer = GetChildByIndex(duelCards, 1) as entity<UIWidget>
-        var opponentDuelCardContainer = GetChildByIndex(duelCards, 2) as entity<UIWidget>
+        var currentDuelCardContainer = GetChildByIndex(duelCards, 0) as entity<UIWidget>
+        var opponentDuelCardContainer = GetChildByIndex(duelCards, 1) as entity<UIWidget>
         _CurrentDuelCard = GetChildByIndex(currentDuelCardContainer, 1) as entity<UIWidget>
         _OpponentDuelCard = GetChildByIndex(opponentDuelCardContainer, 1) as entity<UIWidget>
     }
@@ -52,17 +53,17 @@ graph DuelHUD {
     }
 
     event OnPlayerDrawCard(cardsOnHand List<object>) {
-        LogWarning("[DuelHUD] Receive event OnPlayerDrawCard: " + cardsOnHand)
+        LogInfo("[DuelHUD] Receive event OnPlayerDrawCard: " + cardsOnHand)
 
         for key, card in cardsOnHand {
             _CurrentCards[key]<Card>.UpdateInfo(card as List<object>)
         }
     }
 
-    event OnPlayerShowDuelCard(duelCard List<object>, player entity<Player>) {
-        LogWarning("[DuelHUD] Receive event OnPlayerShowDuelCard: " + player + " show " + duelCard)
+    event OnPlayerShowDuelCard(duelCard List<object>, isOwner bool) {
+        LogInfo("[DuelHUD] Receive event OnPlayerShowDuelCard: " + duelCard)
 
-        if player == _Owner {
+        if isOwner {
             _CurrentDuelCard<Card>.UpdateInfo(duelCard)
             IsSetCurrentDuelCard = true
         } else {

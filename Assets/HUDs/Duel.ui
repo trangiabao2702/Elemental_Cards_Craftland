@@ -7238,7 +7238,16 @@
                 "alpha": 100,
                 "priority": 0
               },
-              "ecaScripts": [],
+              "ecaScripts": [
+                {
+                  "fileId": "yozqu59pce-m81goyt7-flnwujlo0c8",
+                  "filePath": "Assets\\Scripts\\Card.fcg",
+                  "_tag": {
+                    "type": "GFileRefer"
+                  },
+                  "fileType": "ugcscript"
+                }
+              ],
               "ecaProps": {
                 "HudEmptyWidget": {},
                 "HudWidget": {},
@@ -7764,7 +7773,16 @@
                 "alpha": 100,
                 "priority": 0
               },
-              "ecaScripts": [],
+              "ecaScripts": [
+                {
+                  "fileId": "yozqu59pce-m81goyt7-flnwujlo0c8",
+                  "filePath": "Assets\\Scripts\\Card.fcg",
+                  "_tag": {
+                    "type": "GFileRefer"
+                  },
+                  "fileType": "ugcscript"
+                }
+              ],
               "ecaProps": {
                 "HudEmptyWidget": {},
                 "HudWidget": {},

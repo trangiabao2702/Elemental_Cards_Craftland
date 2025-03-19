@@ -6,6 +6,7 @@ import "StdLibrary.fcc" as StdLib
 import "Hostility.fcc" as Hostility
 import "EditorGenLib.fcc" as EditorLib
 
+// import "./PlayerEntity.fcg" as PlayerEntity
 import "./PlayerDeck.fcg" as PlayerDeck
 import "../Card.fcg" as Card
 import "../HUD/DuelHUD.fcg" as DuelHUD
@@ -55,6 +56,10 @@ graph PlayerEntity {
 
     func GetOpponent() entity<Player> {
         return _Opponent
+    }
+
+    func GetDuelHUD() entity<CustomUI> {
+        return _DuelHUD
     }
 
     func GetDuelCard() entity<UIWidget> {
@@ -117,7 +122,10 @@ graph PlayerEntity {
         _DuelCard<Card>.Hide()
         RemoveAt(_CardsOnHand, _DuelCardIndex)
 
-        DispatchEventWithPlatform(OnPlayerShowDuelCard, _DuelHUD, PlatformType.Local, List<object>{_DuelCard<Card>.GetInfo(), thisEntity})
+        DispatchEventWithPlatform(OnPlayerShowDuelCard, _DuelHUD, PlatformType.Local, List<object>{_DuelCard<Card>.GetInfo(), true})
+
+        // var opponent entity<Player> = GetOpponent()
+        // DispatchEventWithPlatform(OnPlayerShowDuelCard, opponent<PlayerEntity>.GetDuelHUD(), PlatformType.Local, List<object>{_DuelCard<Card>.GetInfo(), false})
     }
 
     // Phase: End
