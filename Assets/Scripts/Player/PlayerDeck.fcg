@@ -4,12 +4,8 @@ import "EditorGenLib.fcc" as EditorLib
 graph PlayerDeck {
     _CardsInDeck List<List<object>>
 
-    event OnAwake() {
-        LogWarning("[PlayerDeck] Awake")
-    }
-
     func InitBeginnerDeck() {
-        LogInfo("[PlayerDeck] InitBeginnerDeck()")
+        LogInfo(thisEntity + "[PlayerDeck] InitBeginnerDeck()")
 
         _CardsInDeck = List<List<object>> {
             List<object>{ColorEnum.Gray, ElementEnum.Fire, 1},
@@ -31,17 +27,15 @@ graph PlayerDeck {
     }
 
     func GetDeck() List<List<object>> {
-        LogInfo("[PlayerDeck] GetDeck()")
+        LogInfo(thisEntity + "[PlayerDeck] GetDeck()")
 
-        if _CardsInDeck == nil {
-            InitBeginnerDeck()
-        }
+        InitBeginnerDeck()
 
         return _CardsInDeck
     }
 
     func SetDeck(newDeck List<List<object>>) {
-        LogInfo("[PlayerDeck] SetDeck()")
+        LogInfo(thisEntity + "[PlayerDeck] SetDeck()")
 
         _CardsInDeck = newDeck
     }

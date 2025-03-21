@@ -72,6 +72,16 @@ graph DuelHUD {
         }
     }
 
+    event OnPlayerClaimedSignal(duelCard entity<UIWidget>, isOwner bool) {
+        LogInfo("[DuelHUD] Receive event OnPlayerClaimedSignal: " + duelCard)
+
+        if isOwner {
+            UpdateSignalsVisual(_CurrentSignals, duelCard)
+        } else {
+            UpdateSignalsVisual(_OpponentSignals, duelCard)
+        }
+    }
+
     func CheckSetDuelCards() {
         if IsSetCurrentDuelCard && IsSetOpponentDuelCard {
             DispatchEventWithPlatform(OnDuelCardSet, globalEntity, PlatformType.Local, List<object>{_Owner, _Owner<PlayerEntity>.GetOpponent()})
@@ -80,5 +90,35 @@ graph DuelHUD {
 
     func GetIndexOfCurrentCardWidget(cardWidget entity<UIWidget>) int {
         return IndexOf(_CurrentCards, cardWidget)
+    }
+
+    func UpdateSignalsVisual(signalWidgets List<entity<UIWidget>>, duelCard entity<UIWidget>) {
+        var elementSignal string = duelCard<Card>.GetElement()
+        var elementContainer entity<UIWidget>
+
+        if elementSignal == ElementEnum.Fire {
+            elementContainer = signalWidgets[0]
+        } else if elementSignal == ElementEnum.Water {
+            elementContainer = signalWidgets[1]
+        } else if elementSignal == ElementEnum.Wood {
+            elementContainer = signalWidgets[2]
+        } else {}
+
+        var signalWidget entity<UIWidget> = GetChildByIndex(elementContainer, 0) as entity<UIWidget>
+        if signalWidget<UIWidget>.Active {
+            StdLib.Clone(out var cloneSignalWidget, signalWidget)
+            UpdateSignalVisual(cloneSignalWidget as entity<UIWidget>, duelCard)
+        } else {
+            signalWidget<UIWidget>.Active = true
+            UpdateSignalVisual(signalWidget as entity<UIWidget>, duelCard)
+        }
+    }
+
+    func UpdateSignalVisual(signalWidget entity<UIWidget>, duelCard entity<UIWidget>) {
+        var colorWidget = GetChildByIndex(signalWidget, 1)
+        var elementWidget = GetChildByIndex(signalWidget, 2)
+
+        colorWidget<UIWidgetImage>.Color = duelCard<Card>.GetColorVisual()
+        elementWidget<UIWidgetImage>.SpriteName = duelCard<Card>.GetElementVisual()
     }
 }

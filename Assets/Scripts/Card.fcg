@@ -86,4 +86,16 @@ graph Card {
 
         thisEntity<UIWidget>.Active = false
     }
+
+    func GetSignal() List<object> {
+        return List<object>{_Color, _Element}
+    }
+
+    func GetColorVisual() Color {
+        return CARD_COLORS[_Color]
+    }
+
+    func GetElementVisual() EResSprite {
+        return CARD_ELEMENTS[_Element]
+    }
 }

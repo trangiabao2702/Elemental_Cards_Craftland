@@ -13,22 +13,19 @@ import "../HUD/DuelHUD.fcg" as DuelHUD
 
 graph PlayerEntity {
     _Opponent entity<Player>
-    _Deck List<List<object>>
+    _Deck List<List<object>> = List<List<object>>{}
     _CardsOnHand List<List<object>> = List<List<object>>{}
     _DuelCardIndex int = -1
+    _Signals List<List<object>> = List<List<object>>{}
 
     _DuelHUD entity<CustomUI>
     _DuelCard entity<UIWidget>
     _PrevSelectedCard entity<UIWidget>
 
-    event OnPlayerJoin(player entity<Player>) {
-        CreateCustomUI(out var duelHud, thisEntity<Player>, EResUI.Duel)
-        _DuelHUD = duelHud
-    }
-
     event OnPhaseStart(phase entity<Phase>) {
         var phaseIndex int = phase<Phase>.Index
         if phaseIndex == EPhase.Preparation {
+            InitDuelHUD()
             SetUpDuelDeck()
         } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
             Draw()
@@ -36,7 +33,7 @@ graph PlayerEntity {
             
         } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
             if IsNoCardToDraw() {
-                LogInfo("[PlayerEntity] Lose")
+                LogInfo(thisEntity + "[PlayerEntity] Lose")
             }
         } else {}
     }
@@ -45,6 +42,12 @@ graph PlayerEntity {
         var phaseIndex int = phase<Phase>.Index
         if phaseIndex == EPhase.Phase1SelectCard || phaseIndex == EPhase.Phase2SelectCard {
             ShowDuelCard()
+        }
+    }
+
+    event OnPlayerClaimedSignal(duelCard entity<UIWidget>, isOwner bool) {
+        if isOwner {
+            Append(_Signals, duelCard<Card>.GetSignal())
         }
     }
 
@@ -67,8 +70,15 @@ graph PlayerEntity {
     }
 
     // Phase: Preparation
+    func InitDuelHUD() {
+        LogInfo(thisEntity + "[PlayerEntity] InitDuelHUD()")
+
+        CreateCustomUI(out var duelHud, thisEntity<Player>, EResUI.Duel)
+        _DuelHUD = duelHud
+    }
+
     func SetUpDuelDeck() {
-        LogInfo("[PlayerEntity] SetUpDuelDeck()")
+        LogInfo(thisEntity + "[PlayerEntity] SetUpDuelDeck()")
 
         _Deck = thisEntity<PlayerDeck>.GetDeck()
         Shuffle(_Deck)
@@ -76,7 +86,7 @@ graph PlayerEntity {
 
     // Phase: Start
     func Draw() {
-        LogInfo("[PlayerEntity] Draw()")
+        LogInfo(thisEntity + "[PlayerEntity] Draw()")
 
         if _Deck == nil {
             SetUpDuelDeck()
@@ -99,7 +109,7 @@ graph PlayerEntity {
 
     // Phase: Select
     func SelectCard(cardEntity entity<UIWidget>) {
-        LogInfo("[PlayerEntity] SelectCard(): " + cardEntity)
+        LogInfo(thisEntity + "[PlayerEntity] SelectCard(): " + cardEntity)
 
         var currentPhaseIndex int = globalEntity<Global>.CurrentPhaseIndex
         if currentPhaseIndex == EPhase.Phase1SelectCard || currentPhaseIndex == EPhase.Phase2SelectCard {
@@ -117,7 +127,7 @@ graph PlayerEntity {
 
     // Phase: Duel
     func ShowDuelCard() {
-        LogInfo("[PlayerEntity] ShowDuelCard(): ")
+        LogInfo(thisEntity + "[PlayerEntity] ShowDuelCard(): ")
 
         _DuelCard<Card>.Hide()
         RemoveAt(_CardsOnHand, _DuelCardIndex)

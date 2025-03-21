@@ -21,10 +21,15 @@ graph GameManager {
             LogWarning("PHASE END")
         } else {}
     }
+
     event OnDuelCardSet(player entity<Player>, opponent entity<Player>) {
-        var result CompareEnum = CompareCards(player<PlayerEntity>.GetDuelCard(), opponent<PlayerEntity>.GetDuelCard())
+        var playerDuelCard entity<UIWidget> = player<PlayerEntity>.GetDuelCard()
+        var opponentDuelCard entity<UIWidget> = opponent<PlayerEntity>.GetDuelCard()
+
+        var result CompareEnum = CompareCards(playerDuelCard, opponentDuelCard)
         if result == CompareEnum.Win {
             LogWarning("Player Win: " + player<Player>.NickName)
+            DispatchEventWithPlatform(OnPlayerClaimedSignal, player, PlatformType.Local, List<object>{playerDuelCard})
         } else if result == CompareEnum.Lose {
             LogWarning("Player Lose: " + player<Player>.NickName)
         } else {
