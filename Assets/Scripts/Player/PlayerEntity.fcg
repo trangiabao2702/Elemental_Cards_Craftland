@@ -6,7 +6,7 @@ import "StdLibrary.fcc" as StdLib
 import "Hostility.fcc" as Hostility
 import "EditorGenLib.fcc" as EditorLib
 
-// import "./PlayerEntity.fcg" as PlayerEntity
+import "./PlayerEntity.fcg" as OpponentEntity
 import "./PlayerDeck.fcg" as PlayerDeck
 import "../Card.fcg" as Card
 import "../HUD/DuelHUD.fcg" as DuelHUD
@@ -14,7 +14,7 @@ import "../HUD/DuelHUD.fcg" as DuelHUD
 graph PlayerEntity {
     _Opponent entity<Player>
     _Deck List<List<object>> = List<List<object>>{}
-    _CardsOnHand List<List<object>> = List<List<object>>{}
+    _CardsOnHand List<List<object>>
     _DuelCardIndex int = -1
     _Signals List<List<object>> = List<List<object>>{}
 
@@ -25,6 +25,7 @@ graph PlayerEntity {
     event OnPhaseStart(phase entity<Phase>) {
         var phaseIndex int = phase<Phase>.Index
         if phaseIndex == EPhase.Preparation {
+            SetOpponent()
             InitDuelHUD()
             SetUpDuelDeck()
         } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
@@ -82,16 +83,17 @@ graph PlayerEntity {
 
         _Deck = thisEntity<PlayerDeck>.GetDeck()
         Shuffle(_Deck)
+
+        _CardsOnHand = List<List<object>>{}
     }
 
     // Phase: Start
     func Draw() {
         LogInfo(thisEntity + "[PlayerEntity] Draw()")
 
-        if _Deck == nil {
-            SetUpDuelDeck()
+        for key, ca in _Deck {
+            LogWarning(thisEntity<Player>.NickName + " " + ca)
         }
-
         while Length(_CardsOnHand) < 5 {
             if _DuelCardIndex >= 0 {
                 Insert(_CardsOnHand, _DuelCardIndex, _Deck[0])
@@ -133,9 +135,7 @@ graph PlayerEntity {
         RemoveAt(_CardsOnHand, _DuelCardIndex)
 
         DispatchEventWithPlatform(OnPlayerShowDuelCard, _DuelHUD, PlatformType.Local, List<object>{_DuelCard<Card>.GetInfo(), true})
-
-        // var opponent entity<Player> = GetOpponent()
-        // DispatchEventWithPlatform(OnPlayerShowDuelCard, opponent<PlayerEntity>.GetDuelHUD(), PlatformType.Local, List<object>{_DuelCard<Card>.GetInfo(), false})
+        DispatchEventWithPlatform(OnPlayerShowDuelCard, _Opponent<OpponentEntity>.GetDuelHUD(), PlatformType.Local, List<object>{_DuelCard<Card>.GetInfo(), false})
     }
 
     // Phase: End
