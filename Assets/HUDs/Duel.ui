@@ -5676,7 +5676,7 @@
                   ],
                   "prefabVariant": null,
                   "activeValue": {
-                    "selfValue": true,
+                    "selfValue": false,
                     "valueTag": "activeValue"
                   },
                   "unlockedValue": {
@@ -5684,7 +5684,7 @@
                     "valueTag": "unlockedValue"
                   },
                   "propsData": {
-                    "activeSelf": true,
+                    "activeSelf": false,
                     "transform": {
                       "rotate": 0,
                       "anchorMin": {
@@ -6142,7 +6142,7 @@
                   ],
                   "prefabVariant": null,
                   "activeValue": {
-                    "selfValue": true,
+                    "selfValue": false,
                     "valueTag": "activeValue"
                   },
                   "unlockedValue": {
@@ -6150,7 +6150,7 @@
                     "valueTag": "unlockedValue"
                   },
                   "propsData": {
-                    "activeSelf": true,
+                    "activeSelf": false,
                     "transform": {
                       "rotate": 0,
                       "anchorMin": {
@@ -6608,7 +6608,7 @@
                   ],
                   "prefabVariant": null,
                   "activeValue": {
-                    "selfValue": true,
+                    "selfValue": false,
                     "valueTag": "activeValue"
                   },
                   "unlockedValue": {
@@ -6616,7 +6616,7 @@
                     "valueTag": "unlockedValue"
                   },
                   "propsData": {
-                    "activeSelf": true,
+                    "activeSelf": false,
                     "transform": {
                       "rotate": 0,
                       "anchorMin": {

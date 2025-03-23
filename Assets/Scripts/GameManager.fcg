@@ -23,17 +23,19 @@ graph GameManager {
     }
 
     event OnDuelCardSet(player entity<Player>, opponent entity<Player>) {
+        LogInfo("[GameManager] Receive event OnDuelCardSet")
         var playerDuelCard entity<UIWidget> = player<PlayerEntity>.GetDuelCard()
         var opponentDuelCard entity<UIWidget> = opponent<PlayerEntity>.GetDuelCard()
 
         var result CompareEnum = CompareCards(playerDuelCard, opponentDuelCard)
         if result == CompareEnum.Win {
-            LogWarning("Player Win: " + player<Player>.NickName)
-            DispatchEventWithPlatform(OnPlayerClaimedSignal, player, PlatformType.Local, List<object>{playerDuelCard})
+            LogInfo("[GameManager][OnDuelCardSet] Player Win: " + player<Player>.NickName)
+            DispatchEventWithPlatform(OnPlayerClaimedSignal, player<PlayerEntity>.GetDuelHUD(), PlatformType.Local, List<object>{playerDuelCard, true})
         } else if result == CompareEnum.Lose {
-            LogWarning("Player Lose: " + player<Player>.NickName)
+            LogInfo("[GameManager][OnDuelCardSet] Player Lose: " + player<Player>.NickName)
+            DispatchEventWithPlatform(OnPlayerClaimedSignal, player<PlayerEntity>.GetDuelHUD(), PlatformType.Local, List<object>{opponentDuelCard, false})
         } else {
-            LogWarning("Draw")
+            LogInfo("[GameManager][OnDuelCardSet] Draw")
         }
     }
 

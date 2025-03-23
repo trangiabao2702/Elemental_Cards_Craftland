@@ -70,6 +70,8 @@ graph DuelHUD {
             _OpponentDuelCard<Card>.UpdateInfo(duelCard)
             IsSetOpponentDuelCard = true
         }
+
+        CheckSetDuelCards()
     }
 
     event OnPlayerClaimedSignal(duelCard entity<UIWidget>, isOwner bool) {
