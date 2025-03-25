@@ -46,10 +46,16 @@ graph DuelHUD {
 
     event OnPhaseStart(phase entity<Phase>) {
         var phaseIndex int = phase<Phase>.Index
-        if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
+        if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
+            _CurrentDuelCard<UIWidget>.Active = false
+            _OpponentDuelCard<UIWidget>.Active = false
+        } else if phaseIndex == EPhase.Phase1Duel || phaseIndex == EPhase.Phase2Duel {
+            _CurrentDuelCard<UIWidget>.Active = true
+            _OpponentDuelCard<UIWidget>.Active = true
+        } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
             IsSetCurrentDuelCard = false
             IsSetOpponentDuelCard = false
-        }
+        } else {}
     }
 
     event OnPlayerDrawCard(cardsOnHand List<object>) {
