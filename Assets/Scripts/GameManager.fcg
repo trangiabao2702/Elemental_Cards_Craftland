@@ -11,8 +11,6 @@ graph GameManager {
         var phaseIndex int = phase<Phase>.Index
         if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
             LogWarning("PHASE START")
-        } else if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
-            LogWarning("PHASE START")
         } else if phaseIndex == EPhase.Phase1SelectCard || phaseIndex == EPhase.Phase2SelectCard {
             LogWarning("PHASE SELECT CARD")
         } else if phaseIndex == EPhase.Phase1Duel || phaseIndex == EPhase.Phase2Duel {
@@ -23,7 +21,7 @@ graph GameManager {
     }
 
     event OnDuelCardSet(player entity<Player>, opponent entity<Player>) {
-        LogInfo("[GameManager] Receive event OnDuelCardSet")
+        LogInfo("[GameManager] Receive event OnDuelCardSet: " + player<Player>.NickName + " " + opponent<Player>.NickName)
         var playerDuelCard entity<UIWidget> = player<PlayerEntity>.GetDuelCard()
         var opponentDuelCard entity<UIWidget> = opponent<PlayerEntity>.GetDuelCard()
 
@@ -46,7 +44,8 @@ graph GameManager {
             return resultCompareElements
         }
 
-        return ComparePowerPoints(cardA<Card>.GetPowerPoint(), cardB<Card>.GetPowerPoint())
+        var resultComparePowerPoints CompareEnum = ComparePowerPoints(cardA<Card>.GetPowerPoint(), cardB<Card>.GetPowerPoint())
+        return resultComparePowerPoints
     }
 
     func CompareElements(elementA string, elementB string) CompareEnum {
@@ -56,21 +55,17 @@ graph GameManager {
 
         if elementA == ElementEnum.Fire && elementB == ElementEnum.Water {
             return CompareEnum.Lose
-        } else {
-            return CompareEnum.Win
         }
         
         if elementA == ElementEnum.Water && elementB == ElementEnum.Wood {
             return CompareEnum.Lose
-        } else {
-            return CompareEnum.Win
         }
         
         if elementA == ElementEnum.Wood && elementB == ElementEnum.Fire {
             return CompareEnum.Lose
-        } else {
-            return CompareEnum.Win
         }
+        
+        return CompareEnum.Win
     }
 
     func ComparePowerPoints(powerPointA int, powerPointB int) CompareEnum {

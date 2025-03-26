@@ -114,7 +114,8 @@ graph PlayerEntity {
         LogInfo(thisEntity + "[PlayerEntity] SelectCard(): " + cardEntity)
 
         var currentPhaseIndex int = globalEntity<Global>.CurrentPhaseIndex
-        if currentPhaseIndex == EPhase.Phase1SelectCard || currentPhaseIndex == EPhase.Phase2SelectCard {
+        if currentPhaseIndex == EPhase.Phase1Start || currentPhaseIndex == EPhase.Phase2Start ||
+            currentPhaseIndex == EPhase.Phase1SelectCard || currentPhaseIndex == EPhase.Phase2SelectCard {
             _DuelCard = cardEntity
             _DuelCardIndex = _DuelHUD<DuelHUD>.GetIndexOfCurrentCardWidget(_DuelCard)
 

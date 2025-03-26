@@ -81,7 +81,7 @@ graph DuelHUD {
     }
 
     event OnPlayerClaimedSignal(duelCard entity<UIWidget>, isOwner bool) {
-        LogInfo("[DuelHUD] Receive event OnPlayerClaimedSignal: " + duelCard)
+        LogInfo("[DuelHUD] Receive event OnPlayerClaimedSignal: " + duelCard<Card>.GetSignal() + " " + isOwner)
 
         if isOwner {
             UpdateSignalsVisual(_CurrentSignals, duelCard)
