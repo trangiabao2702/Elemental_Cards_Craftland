@@ -10,12 +10,14 @@ graph GameManager {
     event OnPhaseStart(phase entity<Phase>) {
         var phaseIndex int = phase<Phase>.Index
         if phaseIndex == EPhase.Phase1Start || phaseIndex == EPhase.Phase2Start {
-            LogWarning("PHASE START")
+            LogWarning("ROUND START")
         } else if phaseIndex == EPhase.Phase1SelectCard || phaseIndex == EPhase.Phase2SelectCard {
-            LogWarning("PHASE SELECT CARD")
+            LogWarning("ROUND SELECT CARD")
         } else if phaseIndex == EPhase.Phase1Duel || phaseIndex == EPhase.Phase2Duel {
-            LogWarning("PHASE DUEL")
+            LogWarning("ROUND DUEL")
         } else if phaseIndex == EPhase.Phase1End || phaseIndex == EPhase.Phase2End {
+            LogWarning("ROUND END")
+        } else if phaseIndex == EPhase.End {
             LogWarning("PHASE END")
         } else {}
     }
@@ -29,6 +31,7 @@ graph GameManager {
         if result == CompareEnum.Win {
             LogInfo("[GameManager][OnDuelCardSet] Player Win: " + player<Player>.NickName)
             DispatchEventWithPlatform(OnPlayerClaimedSignal, player<PlayerEntity>.GetDuelHUD(), PlatformType.Local, List<object>{playerDuelCard, true})
+            DispatchEventWithPlatform(OnPlayerClaimedSignal, player, PlatformType.Local, List<object>{playerDuelCard, true})
         } else if result == CompareEnum.Lose {
             LogInfo("[GameManager][OnDuelCardSet] Player Lose: " + player<Player>.NickName)
             DispatchEventWithPlatform(OnPlayerClaimedSignal, player<PlayerEntity>.GetDuelHUD(), PlatformType.Local, List<object>{opponentDuelCard, false})

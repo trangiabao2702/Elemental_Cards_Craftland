@@ -23,7 +23,7 @@
       },
       "editorLockValue": false,
       "editorVisibleValue": true,
-      "gameDuration": 5,
+      "gameDuration": 15,
       "ecaScripts": [],
       "ecaProps": {
         "Phase": {},
@@ -168,8 +168,14 @@
           "_entityId": "1LLmfYqO",
           "children": [],
           "prefabVariant": null,
-          "activeValue": null,
-          "unlockedValue": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
           "editorLockValue": false,
           "editorVisibleValue": true,
           "gameDuration": 5,
@@ -190,8 +196,14 @@
           "_entityId": "GK5dpblg",
           "children": [],
           "prefabVariant": null,
-          "activeValue": null,
-          "unlockedValue": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
           "editorLockValue": false,
           "editorVisibleValue": true,
           "gameDuration": 5,
@@ -212,8 +224,14 @@
           "_entityId": "9LwPBRAs",
           "children": [],
           "prefabVariant": null,
-          "activeValue": null,
-          "unlockedValue": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
           "editorLockValue": false,
           "editorVisibleValue": true,
           "gameDuration": 15,
@@ -234,8 +252,14 @@
           "_entityId": "N14Ok68V",
           "children": [],
           "prefabVariant": null,
-          "activeValue": null,
-          "unlockedValue": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
           "editorLockValue": false,
           "editorVisibleValue": true,
           "gameDuration": 5,
@@ -256,8 +280,14 @@
           "_entityId": "kNrTxiay",
           "children": [],
           "prefabVariant": null,
-          "activeValue": null,
-          "unlockedValue": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
           "editorLockValue": false,
           "editorVisibleValue": true,
           "gameDuration": 5,
@@ -341,9 +371,9 @@
   "curActiveEntity": {
     "_tag": {
       "type": "ff.PhaseEntity1",
-      "resourceId": "GameEnd"
+      "resourceId": "GameStart"
     },
-    "_entityId": "5XIG8qig",
+    "_entityId": "hHOLaJr9",
     "children": [],
     "prefabVariant": null,
     "activeValue": {
@@ -356,7 +386,7 @@
     },
     "editorLockValue": false,
     "editorVisibleValue": true,
-    "gameDuration": 5,
+    "gameDuration": 15,
     "ecaScripts": [],
     "ecaProps": {
       "Phase": {},
@@ -364,8 +394,8 @@
       "Component": {}
     },
     "modId": 18,
-    "_entityName": "FE_0_HW_GAME_EDITOR_FLOW_END",
-    "phaseIndex": 4057
+    "_entityName": "FE_0_HW_GAME_EDITOR_FLOW_START",
+    "phaseIndex": 512
   },
   "roundCount": 4,
   "discriminator": "ISceneLike",

@@ -16,7 +16,12 @@ graph PlayerEntity {
     _Deck List<List<object>> = List<List<object>>{}
     _CardsOnHand List<List<object>>
     _DuelCardIndex int = -1
-    _Signals List<List<object>> = List<List<object>>{}
+    _DiffSignalElements List<object> = List<object>{}
+    _DiffSignalColors Map<object, List<object>> = Map<object, List<object>>{
+        ElementEnum.Fire: List<object>{},
+        ElementEnum.Water: List<object>{},
+        ElementEnum.Wood: List<object>{},
+    }
 
     _DuelHUD entity<CustomUI>
     _DuelCard entity<UIWidget>
@@ -47,8 +52,19 @@ graph PlayerEntity {
     }
 
     event OnPlayerClaimedSignal(duelCard entity<UIWidget>, isOwner bool) {
+        LogInfo("[PlayerEntity] Receive event OnPlayerClaimedSignal")
         if isOwner {
-            Append(_Signals, duelCard<Card>.GetSignal())
+            var signal = duelCard<Card>.GetSignal() // [Color, Element]
+            if !Contain(_DiffSignalElements, signal[1]) {
+                Append(_DiffSignalElements, signal[1])
+            }
+            if !Contain(_DiffSignalColors[signal[1]], signal[0]) {
+                Append(_DiffSignalColors[signal[1]], signal[0])
+            }
+
+            if IsWinner() {
+                LogError("Winnn")
+            }
         }
     }
 
@@ -140,6 +156,20 @@ graph PlayerEntity {
     }
 
     // Phase: End
+    func IsWinner() bool {
+        if Length(_DiffSignalElements) == 3 {
+            return true
+        }
+
+        for key, element in _DiffSignalElements {
+            if Length(_DiffSignalColors[element]) >= 3 {
+                return true
+            }
+        }
+
+        return false
+    }
+
     func IsNoCardToDraw() bool {
         if Length(_Deck) == 0 {
             return true
